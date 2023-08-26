@@ -18,8 +18,8 @@ class LoginController extends _$LoginController {
 
   Future<void> login(String email, String password) async {
     final asyncLoaderHandler = AsyncLoaderHandler()..start();
-    final loginService = ref.watch(userLoginServiceProvider);
-    final result = await loginService.execute(email, password);
+    final userLoginService = ref.watch(userLoginServiceProvider);
+    final result = await userLoginService.execute(email, password);
     switch (result) {
       case Success():
         ref.invalidate(getMeProvider);
