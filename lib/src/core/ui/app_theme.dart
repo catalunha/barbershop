@@ -10,25 +10,36 @@ sealed class AppTheme {
     borderSide: BorderSide(color: AppConstantColors.grey),
   );
   static ThemeData themeData = ThemeData(
-      useMaterial3: true,
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: AppConstantColors.white,
-        labelStyle: const TextStyle(color: AppConstantColors.grey),
-        border: _defaultOutlineInputBorder,
-        enabledBorder: _defaultOutlineInputBorder,
-        errorBorder: _defaultOutlineInputBorder.copyWith(
-          borderSide: const BorderSide(
-            color: AppConstantColors.red,
-          ),
+    useMaterial3: true,
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppConstantColors.white,
+      labelStyle: const TextStyle(color: AppConstantColors.grey),
+      border: _defaultOutlineInputBorder,
+      enabledBorder: _defaultOutlineInputBorder,
+      errorBorder: _defaultOutlineInputBorder.copyWith(
+        borderSide: const BorderSide(
+          color: AppConstantColors.red,
         ),
       ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            foregroundColor: AppConstantColors.white,
-            backgroundColor: AppConstantColors.brow,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-      ),
-      fontFamily: AppConstantFonts.fontFamily);
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+          foregroundColor: AppConstantColors.white,
+          backgroundColor: AppConstantColors.brow,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+    ),
+    fontFamily: AppConstantFonts.fontFamily,
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      iconTheme: IconThemeData(color: AppConstantColors.brow),
+      backgroundColor: AppConstantColors.white,
+      titleTextStyle: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
+          color: AppConstantColors.black,
+          fontFamily: AppConstantFonts.fontFamily),
+    ),
+  );
 }

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:barbershop/src/core/constants/local_storage_keys.dart';
+import 'package:barbershop/src/core/ui/widgets/barbershop_nav_global_key.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -14,5 +18,17 @@ class AuthInterceptor extends Interceptor {
       headers.addAll({'Authorization': 'Bearer $accessToken'});
     }
     handler.next(options);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    final DioException(requestOptions: RequestOptions(:extra), :response) = err;
+    if (extra case {'DIO_AUTH_KEY': true}) {
+      if (response != null && response.statusCode == HttpStatus.forbidden) {
+        Navigator.of(BarbershopNavGlobalKey.instance.navKey.currentContext!)
+            .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+      }
+    }
+    handler.reject(err);
   }
 }
