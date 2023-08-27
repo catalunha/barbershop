@@ -30,6 +30,18 @@ sealed class AppTheme {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: const BorderSide(
+          color: AppConstantColors.brow,
+          width: 1,
+        ),
+        foregroundColor: AppConstantColors.brow,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
     fontFamily: AppConstantFonts.fontFamily,
     appBarTheme: const AppBarTheme(
       centerTitle: true,

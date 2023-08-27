@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'core/ui/app_theme.dart';
 import 'features/auth/register/barbershop/barbershop_register_page.dart';
+import 'features/home/adm/home_adm_page.dart';
 import 'features/splash/splash_page.dart';
 
 class App extends StatelessWidget {
@@ -26,7 +27,7 @@ class App extends StatelessWidget {
             '/': (_) => const SplashPage(),
             '/auth/login': (_) => const LoginPage(),
             '/auth/register/user': (_) => const UserRegisterPage(),
-            '/home/adm': (_) => const Text('adm'),
+            '/home/adm': (_) => const HomeAdmPage(),
             '/home/employee': (_) => const Text('employee'),
             '/auth/register/barbershop': (_) => const BarbershopRegisterPage()
           },
