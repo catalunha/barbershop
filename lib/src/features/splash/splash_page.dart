@@ -1,15 +1,21 @@
-import 'package:barbershop/src/core/ui/app_constants.dart';
-import 'package:barbershop/src/features/auth/login/login_page.dart';
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-class SplashPage extends StatefulWidget {
+import 'package:barbershop/src/core/ui/app_constants.dart';
+import 'package:barbershop/src/core/ui/widgets/messages.dart';
+import 'package:barbershop/src/features/auth/login/login_page.dart';
+import 'package:barbershop/src/features/splash/controller/providers.dart';
+import 'package:barbershop/src/features/splash/controller/states.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ConsumerState<SplashPage> {
   var _scale = 10.0;
   var _animationOpacityLogo = 0.0;
 
@@ -29,6 +35,32 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('SplashPage build... ');
+    ref.listen(splashControllerProvider, (previous, next) {
+      print('SplashController listen... ');
+
+      next.whenOrNull(
+        error: (error, stackTrace) {
+          log('Erro no Splash', error: error, stackTrace: stackTrace);
+          AppMessages.showError('Erro ao validar login', context);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+        },
+        data: (data) {
+          switch (data.status) {
+            case SplashStateStatus.loggedAdm:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home/adm', (route) => false);
+            case SplashStateStatus.loggedEmployee:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home/employee', (route) => false);
+            case _:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+          }
+        },
+      );
+    });
     return Scaffold(
       backgroundColor: Colors.black,
       body: DecoratedBox(
