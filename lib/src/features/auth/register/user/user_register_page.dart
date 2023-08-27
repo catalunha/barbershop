@@ -1,9 +1,10 @@
 import 'package:barbershop/src/core/ui/widgets/messages.dart';
-import 'package:barbershop/src/features/auth/register/controller/providers.dart';
-import 'package:barbershop/src/features/auth/register/controller/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
+
+import 'controller/providers.dart';
+import 'controller/states.dart';
 
 class UserRegisterPage extends ConsumerStatefulWidget {
   const UserRegisterPage({super.key});
@@ -28,7 +29,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userRegisterController = ref.watch(userRegisterControllerProvider);
+    // final userRegisterController = ref.watch(userRegisterControllerProvider);
     ref.listen(
       userRegisterControllerProvider,
       (previous, next) {
