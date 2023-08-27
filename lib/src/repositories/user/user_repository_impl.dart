@@ -96,4 +96,74 @@ class UserRepositoryImpl implements UserRepository {
       return Failure(RepositoryException(message: e.message));
     }
   }
+
+  @override
+  Future<Either<RepositoryException, Nil>> registerAdmAsEmployee(
+      ({List<String> workDays, List<int> workHours}) dto) async {
+    try {
+      final userModelResult = await me();
+      // final UserModel userModel;
+      // switch (userModelResult) {
+      //   case Success(value: final user):
+      //     userModel = user;
+      //   case Failure(:var exception):
+      //     return Failure(exception);
+      // }
+      //     await restClient.auth.put('/users/${userModel.id}', data: {
+      //   'work_days': dto.workDays,
+      //   'work_hours': dto.workHours,
+      // });
+      final int userId;
+      switch (userModelResult) {
+        case Success(value: UserModel(:final id)):
+          userId = id;
+        case Failure(:var exception):
+          return Failure(exception);
+      }
+      await restClient.auth.put('/users/$userId', data: {
+        'work_days': dto.workDays,
+        'work_hours': dto.workHours,
+      });
+      return Success(Nil());
+    } on DioException catch (e, s) {
+      log('UserRepositoryImpl.registerAdmAsEmployee DioException',
+          name: 'Error', error: e, stackTrace: s);
+      return Failure(
+          RepositoryException(message: 'Erro ao registerAdmAsEmployee'));
+    }
+    // on ArgumentError catch (e, s) {
+    //   log('UserRepositoryImpl.registerAdmAsEmployee ArgumentError',
+    //       name: 'Error', error: e, stackTrace: s);
+    //   return Failure(RepositoryException(message: e.message));
+    // }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> registerEmployee(
+      ({
+        int barbershopId,
+        String name,
+        String email,
+        String password,
+        List<String> workDays,
+        List<int> workHours,
+      }) dto) async {
+    try {
+      await restClient.auth.post('/users/', data: {
+        'name': dto.name,
+        'email': dto.email,
+        'password': dto.password,
+        'barbershop_id': dto.barbershopId,
+        'profile': 'EMPLOYEE',
+        'work_days': dto.workDays,
+        'work_hours': dto.workHours,
+      });
+      return Success(Nil());
+    } on DioException catch (e, s) {
+      log('UserRepositoryImpl.registerAdmAsEmployee DioException',
+          name: 'Error', error: e, stackTrace: s);
+      return Failure(
+          RepositoryException(message: 'Erro ao registerAdmAsEmployee'));
+    }
+  }
 }

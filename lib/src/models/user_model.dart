@@ -84,45 +84,24 @@ class UserModelEmployee extends UserModel {
     super.avatar,
   });
   factory UserModelEmployee.fromMap(Map<String, dynamic> json) {
-    print('json');
-    print(json);
-    if (json['id'] is int) {
-      print('id é int');
-    }
-    if (json['name'] is String) {
-      print('name é String');
-    }
-    if (json['email'] is String) {
-      print('email é String');
-    }
-    if (json['barbershop_id'] is int) {
-      print('barbershop_id é int');
-    }
-    if (json['work_days'] is List<String>) {
-      print('work_days é  List<String>');
-    }
-    print(json['work_days'].runtimeType);
-    if (json['work_hours'] is List<int>) {
-      print('work_hours é List<int>');
-    }
     return switch (json) {
       {
         'id': int id,
         'name': String name,
         'email': String email,
         'barbershop_id': int barbershopId,
-        // 'work_days': List<String> workDays,
-        // 'work_hours': List<int> workHours,
+        'work_days': List workDays,
+        'work_hours': List workHours,
       } =>
         UserModelEmployee(
           id: id,
           name: name,
           email: email,
           barbershopId: barbershopId,
-          workDays: json['work_days'].cast<String>(),
-          workHours: json['work_hours'].cast<int>(),
-          // workDays: workDays.cast<String>(),
-          // workHours: workHours.cast<int>(),
+          // workDays: json['work_days'].cast<String>(),
+          // workHours: json['work_hours'].cast<int>(),
+          workDays: workDays.cast<String>(),
+          workHours: workHours.cast<int>(),
           avatar: json['avatar'],
         ),
       _ => throw ArgumentError('Json Inválido')

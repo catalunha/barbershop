@@ -18,7 +18,10 @@ class HomeAdmPage extends ConsumerWidget {
     final homeAdmController = ref.watch(homeAdmControllerProvider);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          await Navigator.of(context).pushNamed('/employee/register');
+          ref.invalidate(homeAdmControllerProvider);
+        },
         backgroundColor: AppConstantColors.brow,
         child: const Icon(Icons.add),
       ),
