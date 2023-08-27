@@ -76,4 +76,24 @@ class UserRepositoryImpl implements UserRepository {
       return Failure(RepositoryException(message: 'Erro ao registrar admin'));
     }
   }
+
+  @override
+  Future<Either<RepositoryException, List<UserModel>>> getEmployees(
+      int barbershopId) async {
+    try {
+      final Response(:List data) = await restClient.auth
+          .get('/users', queryParameters: {'barbershop_id': barbershopId});
+      final employees = data.map((e) => UserModelEmployee.fromMap(e)).toList();
+      return Success(employees);
+    } on DioException catch (e, s) {
+      log('UserRepositoryImpl.getEmployees DioException',
+          name: 'Error', error: e, stackTrace: s);
+      return Failure(
+          RepositoryException(message: 'Erro ao buscar colaborador'));
+    } on ArgumentError catch (e, s) {
+      log('UserRepositoryImpl.getEmployees ArgumentError',
+          name: 'Error', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: e.message));
+    }
+  }
 }

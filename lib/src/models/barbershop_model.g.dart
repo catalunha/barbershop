@@ -12,7 +12,7 @@ _$_BarbershopModel _$$_BarbershopModelFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['name', 'email', 'opening_days', 'opening_hours'],
   );
   return _$_BarbershopModel(
-    id: json['id'] as int?,
+    id: json['id'] as int,
     name: json['name'] as String,
     email: json['email'] as String,
     openingDays: (json['opening_days'] as List<dynamic>)

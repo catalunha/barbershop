@@ -8,7 +8,7 @@ part 'barbershop_model.g.dart';
 abstract class BarbershopModel with _$BarbershopModel {
   @JsonKey(includeIfNull: false)
   factory BarbershopModel({
-    int? id,
+    required int id,
     @JsonKey(required: true) required String name,
     @JsonKey(required: true) required String email,
     @JsonKey(name: 'opening_days', required: true)

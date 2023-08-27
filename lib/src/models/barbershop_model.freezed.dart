@@ -20,7 +20,7 @@ BarbershopModel _$BarbershopModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BarbershopModel {
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(required: true)
   String get name => throw _privateConstructorUsedError;
   @JsonKey(required: true)
@@ -43,7 +43,7 @@ abstract class $BarbershopModelCopyWith<$Res> {
       _$BarbershopModelCopyWithImpl<$Res, BarbershopModel>;
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       @JsonKey(required: true) String name,
       @JsonKey(required: true) String email,
       @JsonKey(name: 'opening_days', required: true) List<String> openingDays,
@@ -63,17 +63,17 @@ class _$BarbershopModelCopyWithImpl<$Res, $Val extends BarbershopModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? openingDays = null,
     Object? openingHours = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$$_BarbershopModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {int id,
       @JsonKey(required: true) String name,
       @JsonKey(required: true) String email,
       @JsonKey(name: 'opening_days', required: true) List<String> openingDays,
@@ -121,17 +121,17 @@ class __$$_BarbershopModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? openingDays = null,
     Object? openingHours = null,
   }) {
     return _then(_$_BarbershopModel(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ class __$$_BarbershopModelCopyWithImpl<$Res>
 @JsonKey(includeIfNull: false)
 class _$_BarbershopModel implements _BarbershopModel {
   _$_BarbershopModel(
-      {this.id,
+      {required this.id,
       @JsonKey(required: true) required this.name,
       @JsonKey(required: true) required this.email,
       @JsonKey(name: 'opening_days', required: true)
@@ -171,7 +171,7 @@ class _$_BarbershopModel implements _BarbershopModel {
       _$$_BarbershopModelFromJson(json);
 
   @override
-  final int? id;
+  final int id;
   @override
   @JsonKey(required: true)
   final String name;
@@ -241,7 +241,7 @@ class _$_BarbershopModel implements _BarbershopModel {
 
 abstract class _BarbershopModel implements BarbershopModel {
   factory _BarbershopModel(
-      {final int? id,
+      {required final int id,
       @JsonKey(required: true) required final String name,
       @JsonKey(required: true) required final String email,
       @JsonKey(name: 'opening_days', required: true)
@@ -253,7 +253,7 @@ abstract class _BarbershopModel implements BarbershopModel {
       _$_BarbershopModel.fromJson;
 
   @override
-  int? get id;
+  int get id;
   @override
   @JsonKey(required: true)
   String get name;

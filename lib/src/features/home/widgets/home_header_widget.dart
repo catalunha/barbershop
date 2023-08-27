@@ -1,12 +1,19 @@
+import 'package:barbershop/src/core/providers/app_providers.dart';
 import 'package:barbershop/src/core/ui/app_constants.dart';
+import 'package:barbershop/src/features/home/adm/controller/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeHeaderWidget extends StatelessWidget {
+import '../../../core/ui/widgets/app_loader.dart';
+
+class HomeHeaderWidget extends ConsumerWidget {
   final bool showFilter;
   const HomeHeaderWidget({super.key, this.showFilter = true});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final getMyBarbershop = ref.watch(getMyBarbershopProvider);
+
     return Container(
       padding: const EdgeInsets.all(24),
       margin: const EdgeInsets.only(bottom: 20),
@@ -27,40 +34,51 @@ class HomeHeaderWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const CircleAvatar(
-                backgroundColor: AppConstantColors.greyLight,
-                child: SizedBox.shrink(),
-              ),
-              const SizedBox(width: 16),
-              const Flexible(
-                child: Text(
-                  'Andrea Andrea Andrea Andrea Andrea ',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: AppConstantColors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+          getMyBarbershop.maybeWhen(
+            data: (data) {
+              return Row(
+                children: [
+                  const CircleAvatar(
+                    backgroundColor: AppConstantColors.greyLight,
+                    child: SizedBox.shrink(),
                   ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              const Text(
-                'Editar',
-                style: TextStyle(
-                  color: AppConstantColors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.abc,
-                    color: AppConstantColors.brow,
-                  ))
-            ],
+                  const SizedBox(width: 16),
+                  Flexible(
+                    child: Text(
+                      data.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: AppConstantColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Text(
+                    'Editar',
+                    style: TextStyle(
+                      color: AppConstantColors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        ref.read(homeAdmControllerProvider.notifier).logout();
+                      },
+                      icon: const Icon(
+                        Icons.exit_to_app,
+                        color: AppConstantColors.white,
+                      ))
+                ],
+              );
+            },
+            orElse: () {
+              return const Center(
+                child: AppLoader(),
+              );
+            },
           ),
           const SizedBox(width: 16),
           const Text(
