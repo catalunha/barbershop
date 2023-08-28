@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:validatorless/validatorless.dart';
 
 import '../../core/ui/widgets/avatar.dart';
+import '../../models/user_model.dart';
+import 'controller/states.dart';
 import 'widgets/schedule_calendar.dart';
 
 class SchedulePage extends ConsumerStatefulWidget {
@@ -32,7 +34,32 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
     final scheduleController = ref.watch(scheduleControllerProvider.notifier);
+    final employeeData = switch (userModel) {
+      UserModelAdm(:final workDays, :final workHours) => (
+          workDays: workDays!,
+          workHours: workHours!
+        ),
+      UserModelEmployee(:final workDays, :final workHours) => (
+          workDays: workDays,
+          workHours: workHours
+        )
+    };
+    ref.listen(
+      scheduleControllerProvider.select((state) => state.status),
+      (previous, next) {
+        switch (next) {
+          case ScheduleStateStatus.initial:
+            break;
+          case ScheduleStateStatus.success:
+            AppMessages.showSuccess('Cliente agendado com sucesso', context);
+            Navigator.of(context).pop();
+          case ScheduleStateStatus.error:
+            AppMessages.showError('Erro ao resgistrar agendamento', context);
+        }
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Schedule'),
@@ -46,9 +73,9 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                 child: Column(
               children: [
                 const Avatar(hideUpload: true),
-                const Text(
-                  'Nome e Sobrenome',
-                  style: TextStyle(
+                Text(
+                  userModel.name,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -94,6 +121,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                         showCalendar = false;
                       });
                     },
+                    workDays: employeeData.workDays,
                   ),
                 ),
                 HoursPanel.singleSelection(
@@ -102,7 +130,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                   onPressed: (p0) {
                     scheduleController.hourSelect(p0);
                   },
-                  enabledHours: const [6, 7, 8],
+                  enabledHours: employeeData.workHours,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -115,6 +143,9 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                                 .select((state) => state.scheduleHour != null));
 
                         if (hourSelected) {
+                          scheduleController.register(
+                              userModel: userModel,
+                              clientName: clienteTEC.text);
                         } else {
                           AppMessages.showError('Selecione a hora', context);
                         }

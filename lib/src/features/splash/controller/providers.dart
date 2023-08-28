@@ -26,7 +26,7 @@ class SplashController extends _$SplashController {
             SplashState(status: SplashStateStatus.loggedEmployee)
         };
       } catch (e, s) {
-        log('Erro no Splash', error: e, stackTrace: s);
+        log('Erro no SplashController.build() ', error: e, stackTrace: s);
         return SplashState(status: SplashStateStatus.login);
       }
     }

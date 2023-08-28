@@ -38,10 +38,10 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     print('SplashPage build... ');
     ref.listen(splashControllerProvider, (previous, next) {
       print('SplashController listen... ');
-
       next.whenOrNull(
         error: (error, stackTrace) {
-          log('Erro no Splash', error: error, stackTrace: stackTrace);
+          log('Erro no SplashPage.build()',
+              error: error, stackTrace: stackTrace);
           AppMessages.showError('Erro ao validar login', context);
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/auth/login', (route) => false);
