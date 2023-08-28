@@ -66,6 +66,22 @@ final barbershopRepositoryProvider = Provider<BarbershopRepository>.internal(
 );
 
 typedef BarbershopRepositoryRef = ProviderRef<BarbershopRepository>;
+String _$scheduleRepositoryHash() =>
+    r'68878023be0e26fae6a9a10b90d6b1a53c1a54f8';
+
+/// See also [scheduleRepository].
+@ProviderFor(scheduleRepository)
+final scheduleRepositoryProvider = Provider<ScheduleRepository>.internal(
+  scheduleRepository,
+  name: r'scheduleRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$scheduleRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ScheduleRepositoryRef = ProviderRef<ScheduleRepository>;
 String _$getMeHash() => r'835de91f459d1216fe7813de1ce4ffa8c28975d4';
 
 /// See also [getMe].

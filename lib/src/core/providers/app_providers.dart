@@ -8,6 +8,8 @@ import '../../models/barbershop_model.dart';
 import '../../models/user_model.dart';
 import '../../repositories/barbershop/barbershop_repository.dart';
 import '../../repositories/barbershop/barbershop_repository_impl.dart';
+import '../../repositories/schedule/schedule_repository.dart';
+import '../../repositories/schedule/schedule_repository_impl.dart';
 import '../../repositories/user/user_repository.dart';
 import '../../repositories/user/user_repository_impl.dart';
 import '../../services/user_login/user_login_service.dart';
@@ -34,6 +36,11 @@ UserLoginService userLoginService(UserLoginServiceRef ref) {
 @Riverpod(keepAlive: true)
 BarbershopRepository barbershopRepository(BarbershopRepositoryRef ref) {
   return BarbershopRepositoryImpl(restClient: ref.read(restClientProvider));
+}
+
+@Riverpod(keepAlive: true)
+ScheduleRepository scheduleRepository(ScheduleRepositoryRef ref) {
+  return ScheduleRepositoryImpl(restClient: ref.read(restClientProvider));
 }
 
 @Riverpod(keepAlive: true)

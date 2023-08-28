@@ -9,6 +9,7 @@ import 'core/ui/app_theme.dart';
 import 'features/auth/register/barbershop/barbershop_register_page.dart';
 import 'features/employee/register/employee_register_page.dart';
 import 'features/home/adm/home_adm_page.dart';
+import 'features/schedules/schedule_page.dart';
 import 'features/splash/splash_page.dart';
 
 class App extends StatelessWidget {
@@ -31,7 +32,8 @@ class App extends StatelessWidget {
             '/home/adm': (_) => const HomeAdmPage(),
             '/home/employee': (_) => const Text('employee'),
             '/auth/register/barbershop': (_) => const BarbershopRegisterPage(),
-            '/employee/register': (_) => const EmployeeRegisterPage()
+            '/employee/register': (_) => const EmployeeRegisterPage(),
+            '/schedule': (_) => const SchedulePage(),
           },
         );
       },
