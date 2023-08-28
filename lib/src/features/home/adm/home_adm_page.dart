@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:barbershop/src/core/providers/app_providers.dart';
 import 'package:barbershop/src/core/ui/app_constants.dart';
 import 'package:barbershop/src/core/ui/widgets/app_loader.dart';
 import 'package:barbershop/src/features/home/adm/controller/providers.dart';
@@ -20,6 +21,7 @@ class HomeAdmPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.of(context).pushNamed('/employee/register');
+          ref.invalidate(getMeProvider);
           ref.invalidate(homeAdmControllerProvider);
         },
         backgroundColor: AppConstantColors.brow,

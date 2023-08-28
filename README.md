@@ -8,6 +8,11 @@ catalunha@pop-os:~/myapp/dw11/barbershop/api$ jrs run
 catalunha@pop-os:~/myapp/dw11/barbershop$ dart run build_runner watch -d
 catalunha@pop-os:~/myapp/dw11/barbershop$ flutter pub add intl
 
+# Resolvidos
+#1 calendar
+https://instructivetech.com/flutter-table-calendar/#gsc.tab=0
+https://pub.dev/packages/time_planner
+
 
 # Duvidas
 # 1
@@ -21,3 +26,11 @@ Eu usava o ref.listen(...) pra fazer isto.
 https://pub.dev/packages/time_planner
 
 Falando em licenças. Qual posso usar em meus app MIT, etc ?
+
+
+code can not be quick and dirty
+
+catalunha@pop-os:~/myapp/dw11/barbershop$ git rm -r --cached .
+
+
+parei no 35min buscando 

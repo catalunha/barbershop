@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:asyncstate/widget/async_state_builder.dart';
 import 'package:barbershop/src/core/ui/widgets/app_loader.dart';
 import 'package:barbershop/src/core/ui/widgets/barbershop_nav_global_key.dart';
 import 'package:barbershop/src/features/auth/login/login_page.dart';
 import 'package:barbershop/src/features/auth/register/user/user_register_page.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/ui/app_theme.dart';
 import 'features/auth/register/barbershop/barbershop_register_page.dart';
@@ -26,6 +27,15 @@ class App extends StatelessWidget {
           theme: AppTheme.themeData,
           navigatorObservers: [asyncNavigatorObserver],
           navigatorKey: BarbershopNavGlobalKey.instance.navKey,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt_BR'),
+          ],
+          locale: const Locale('pt_BR'),
           routes: {
             '/': (_) => const SplashPage(),
             '/auth/login': (_) => const LoginPage(),
