@@ -14,6 +14,7 @@ class SplashController extends _$SplashController {
   @override
   Future<SplashState> build() async {
     print('SplashController build... ');
+    await Future.delayed(const Duration(seconds: 5));
     final sp = await SharedPreferences.getInstance();
     if (sp.containsKey(AppLocalStorageKeys.accessToken)) {
       ref.invalidate(getMeProvider);

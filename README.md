@@ -6,7 +6,6 @@ BarberShop App no DW11
 
 catalunha@pop-os:~/myapp/dw11/barbershop/api$ jrs run
 catalunha@pop-os:~/myapp/dw11/barbershop$ dart run build_runner watch -d
-catalunha@pop-os:~/myapp/dw11/barbershop$ flutter pub add intl
 
 # Resolvidos
 #1 calendar
