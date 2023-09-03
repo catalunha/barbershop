@@ -6,7 +6,10 @@ import '../../core/funcional_program/either.dart';
 import '../../core/funcional_program/nil.dart';
 
 abstract interface class UserRepository {
-  Future<Either<AuthException, String>> login(String email, String password);
+  Future<Either<AuthException, String>> login(
+    String email,
+    String password,
+  );
   Future<Either<RepositoryException, UserModel>> me();
   Future<Either<RepositoryException, Nil>> registerAdmin(
       ({

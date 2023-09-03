@@ -18,7 +18,6 @@ class UserLoginServiceImpl implements UserLoginService {
   Future<Either<ServiceException, Nil>> execute(
       String email, String password) async {
     final loginResult = await userRepository.login(email, password);
-    // testar pra ver se aqui pode usar provider
     switch (loginResult) {
       case Success(value: final accessToken):
         final sp = await SharedPreferences.getInstance();
