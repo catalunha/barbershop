@@ -33,3 +33,5 @@ catalunha@pop-os:~/myapp/dw11/barbershop$ git rm -r --cached .
 
 
 parei no 35min buscando 
+
+a
